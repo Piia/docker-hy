@@ -1,0 +1,4 @@
+Edited Dockerfiles are in folders 1_10 and 1_11.
+
+docker build -t backend-example-docker .
+docker run --rm -p 8000:8000 backend-example-docker

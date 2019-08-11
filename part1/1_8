@@ -1,0 +1,1 @@
+docker run --rm -d -v $(pwd)/logs.txt:/usr/app/logs.txt --name logfile devopsdockeruh/first_volume_exercise
