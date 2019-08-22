@@ -1,0 +1,32 @@
+version: '3.5'  
+
+services: 
+    backend-example-docker:
+      build: ../../part1/1_11/
+      ports: 
+        - 8000:8000 
+      environment:
+        - FRONT_URL=http://localhost:5000
+        - REDIS=redis
+        - REDIS_PORT=6379
+        - DB_USERNAME=postgres
+        - DB_PASSWORD=secret
+        - DB_NAME=postgres
+        - DB_HOST=db
+
+
+    frontend-example-docker:
+      build: ../../part1/1_10/
+      ports: 
+        - 5000:5000 
+
+    redis:
+      image: redis
+      container_name: redis
+
+    db:
+      image: postgres
+      restart: unless-stopped
+      environment:
+        POSTGRES_PASSWORD: secret
+      container_name: db

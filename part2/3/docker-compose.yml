@@ -1,0 +1,14 @@
+version: '3.5'  
+
+services: 
+    backend-example-docker:
+      build: ../../part1/1_11/
+      ports: 
+        - 8000:8000 
+      environment:
+        - FRONT_URL=http://localhost:5000
+
+    frontend-example-docker:
+      build: ../../part1/1_10/
+      ports: 
+        - 5000:5000 
