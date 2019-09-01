@@ -1,0 +1,17 @@
+docker history backend-example-docker
+IMAGE               CREATED              CREATED BY                                      SIZE                COMMENT
+2d9efc8cd3a0        49 seconds ago       /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+f60608db24b9        50 seconds ago       /bin/sh -c npm install                          58.3MB              
+766b020508f1        About a minute ago   /bin/sh -c #(nop) COPY dir:87a7267c1360f9e78…   323kB   
+...
+
+docker history frontend-example-docker
+IMAGE               CREATED              CREATED BY                                      SIZE                COMMENT
+9c242c63d8b2        57 seconds ago       /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+d26eec39dcf1        58 seconds ago       /bin/sh -c npm install                          155MB               
+7620d96cae44        About a minute ago   /bin/sh -c #(nop) COPY dir:75fb694371d037b4f…   574kB
+...
+
+
+
+There were really nothing to optimize since my Dockerfiles are from node.

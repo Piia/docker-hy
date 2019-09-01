@@ -1,0 +1,48 @@
+Both Dockerfiles have been from NODE for some time.
+
+
+docker history frontend-example-docker
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+9c242c63d8b2        5 days ago          /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+d26eec39dcf1        5 days ago          /bin/sh -c npm install                          155MB               
+7620d96cae44        5 days ago          /bin/sh -c #(nop) COPY dir:75fb694371d037b4f…   574kB               
+c9b947952769        3 weeks ago         /bin/sh -c #(nop) WORKDIR /1_10                 0B                  
+de2a84668152        3 weeks ago         /bin/sh -c #(nop)  ENV API_URL=http://localh…   0B                  
+d4165a9ebc34        3 weeks ago         /bin/sh -c #(nop)  EXPOSE 5000                  0B                  
+16b062cafbd0        5 weeks ago         /bin/sh -c #(nop)  CMD ["node"]                 0B                  
+<missing>           5 weeks ago         /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B                  
+<missing>           5 weeks ago         /bin/sh -c #(nop) COPY file:238737301d473041…   116B                
+<missing>           5 weeks ago         /bin/sh -c set -ex   && for key in     6A010…   5.47MB              
+<missing>           5 weeks ago         /bin/sh -c #(nop)  ENV YARN_VERSION=1.17.3      0B                  
+<missing>           5 weeks ago         /bin/sh -c ARCH= && dpkgArch="$(dpkg --print…   66.3MB              
+<missing>           5 weeks ago         /bin/sh -c #(nop)  ENV NODE_VERSION=12.7.0      0B                  
+<missing>           7 weeks ago         /bin/sh -c groupadd --gid 1000 node   && use…   333kB               
+<missing>           7 weeks ago         /bin/sh -c set -ex;  apt-get update;  apt-ge…   562MB               
+<missing>           7 weeks ago         /bin/sh -c apt-get update && apt-get install…   142MB               
+<missing>           7 weeks ago         /bin/sh -c set -ex;  if ! command -v gpg > /…   7.81MB              
+<missing>           7 weeks ago         /bin/sh -c apt-get update && apt-get install…   23.2MB              
+<missing>           7 weeks ago         /bin/sh -c #(nop)  CMD ["bash"]                 0B                  
+<missing>           7 weeks ago         /bin/sh -c #(nop) ADD file:f615b611820773fd6…   101MB               
+
+
+docker history backend-example-docker
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+2d9efc8cd3a0        5 days ago          /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+f60608db24b9        5 days ago          /bin/sh -c npm install                          58.3MB              
+766b020508f1        5 days ago          /bin/sh -c #(nop) COPY dir:87a7267c1360f9e78…   323kB               
+6add33d35454        3 weeks ago         /bin/sh -c #(nop) WORKDIR /1_11                 0B                  
+6df958ca775c        3 weeks ago         /bin/sh -c #(nop)  EXPOSE 8000                  0B                  
+16b062cafbd0        5 weeks ago         /bin/sh -c #(nop)  CMD ["node"]                 0B                  
+<missing>           5 weeks ago         /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B                  
+<missing>           5 weeks ago         /bin/sh -c #(nop) COPY file:238737301d473041…   116B                
+<missing>           5 weeks ago         /bin/sh -c set -ex   && for key in     6A010…   5.47MB              
+<missing>           5 weeks ago         /bin/sh -c #(nop)  ENV YARN_VERSION=1.17.3      0B                  
+<missing>           5 weeks ago         /bin/sh -c ARCH= && dpkgArch="$(dpkg --print…   66.3MB              
+<missing>           5 weeks ago         /bin/sh -c #(nop)  ENV NODE_VERSION=12.7.0      0B                  
+<missing>           7 weeks ago         /bin/sh -c groupadd --gid 1000 node   && use…   333kB               
+<missing>           7 weeks ago         /bin/sh -c set -ex;  apt-get update;  apt-ge…   562MB               
+<missing>           7 weeks ago         /bin/sh -c apt-get update && apt-get install…   142MB               
+<missing>           7 weeks ago         /bin/sh -c set -ex;  if ! command -v gpg > /…   7.81MB              
+<missing>           7 weeks ago         /bin/sh -c apt-get update && apt-get install…   23.2MB              
+<missing>           7 weeks ago         /bin/sh -c #(nop)  CMD ["bash"]                 0B                  
+<missing>           7 weeks ago         /bin/sh -c #(nop) ADD file:f615b611820773fd6…   101MB  

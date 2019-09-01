@@ -1,0 +1,95 @@
+Rails project from excercise 1.14.
+Reduced image size from 1.05GB to 334MB and improved security.
+Used this post as a guide: https://medium.com/@lemuelbarango/ruby-on-rails-smaller-docker-images-bff240931332
+
+
+- Before optimizing:
+
+docker history rails-example-project
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+e3f23d2a657d        14 minutes ago      /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+1d402f4da815        14 minutes ago      /bin/sh -c rake assets:precompile               542kB               
+c5720b3e67e9        14 minutes ago      /bin/sh -c rails db:migrate RAILS_ENV=produc…   4.76MB              
+be5e511f69da        14 minutes ago      /bin/sh -c rails credentials:edit               21.1MB              
+bf0044209d5e        14 minutes ago      /bin/sh -c rm config/credentials.yml.enc        0B                  
+b52d24287051        14 minutes ago      /bin/sh -c bundle install                       124MB  
+
+docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
+rails-example-project                           latest              e3f23d2a657d        17 minutes ago      1.05GB
+
+
+- Use ruby:2.6.0-alpine (had to make changes to installs):
+
+docker history rails-example-project
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+ad94ddaff0a5        11 minutes ago      /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+212ba2660fcd        11 minutes ago      /bin/sh -c rake assets:precompile               537kB               
+712a89938476        11 minutes ago      /bin/sh -c rails db:migrate RAILS_ENV=produc…   4.76MB
+
+docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
+rails-example-project                           latest              ad94ddaff0a5        13 minutes ago      385MB
+
+
+- Optimize RUNs:
+
+docker history rails-example-project
+IMAGE               CREATED              CREATED BY                                      SIZE                COMMENT
+430fbd43b5a7        About a minute ago   /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+7f4c17dc6cf2        About a minute ago   /bin/sh -c apk add --update --no-cache nodej…   317MB  
+
+docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED              SIZE
+rails-example-project                           latest              430fbd43b5a7        About a minute ago   358MB
+
+
+- Use multi-stage builds:
+
+docker history rails-example-project
+IMAGE               CREATED              CREATED BY                                      SIZE                COMMENT
+cef8680b53ea        About a minute ago   /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+0814539deb93        About a minute ago   /bin/sh -c #(nop) COPY dir:d275305d43834c0c5…   357MB               
+8a200aa1805c        About a minute ago   /bin/sh -c #(nop)  EXPOSE 3000                  0B   
+
+docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED              SIZE
+rails-example-project                           latest              cef8680b53ea        About a minute ago   397MB
+
+
+- Remove unnecessary files:
+
+docker history rails-example-project
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+ec4becf0707a        3 minutes ago       /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+aa121c0fc7b1        3 minutes ago       /bin/sh -c #(nop) COPY dir:827d217911c6bb6db…   331MB 
+
+docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
+rails-example-project                           latest              ec4becf0707a        3 minutes ago       371MB
+
+
+- Remove more files:
+
+docker history rails-example-project
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+078af7f0b6a5        2 minutes ago       /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+12fd13289398        2 minutes ago       /bin/sh -c #(nop) COPY dir:441a74e429b60bcc8…   294MB  
+
+docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
+rails-example-project                           latest              078af7f0b6a5        3 minutes ago       334MB
+
+
+- Added user app:
+
+docker history rails-example-project
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+dcf41bc4ad64        2 minutes ago       /bin/sh -c #(nop)  ENTRYPOINT ["/bin/sh" "-c…   0B                  
+1d2d123f7508        2 minutes ago       /bin/sh -c #(nop) COPY dir:441a74e429b60bcc8…   294MB               
+6c3e95aece40        2 minutes ago       /bin/sh -c #(nop)  USER app                     0B                  
+563afd93bc52        2 minutes ago       /bin/sh -c adduser -D app                       4.8kB   
+
+docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED              SIZE
+rails-example-project                           latest              dcf41bc4ad64        About a minute ago   334MB

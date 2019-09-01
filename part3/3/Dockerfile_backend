@@ -1,0 +1,7 @@
+FROM node
+EXPOSE 8000
+WORKDIR /1_11
+COPY ./backend-example-docker .
+RUN npm install && useradd -m app
+USER app
+ENTRYPOINT npm start

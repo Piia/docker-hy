@@ -1,0 +1,8 @@
+FROM node
+EXPOSE 5000
+ENV API_URL=http://localhost:8000
+WORKDIR /1_10
+COPY ./frontend-example-docker .
+RUN npm install && useradd -m app
+USER app
+ENTRYPOINT npm start
